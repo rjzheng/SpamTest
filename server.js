@@ -12,24 +12,29 @@ app.get('/get/:element', (req, res) => {
   res.send(`${node}`);
 });
 
-app.post('/add', (req, res) => {
+// app.post('/add/:element', (req, res) => {
+//   const element = req.params.element;
+//   LinkedList.add(element);
+//   console.log(`adding node ${element}`);
+//   res.send(element);
+// });
+
+app.post('/add/:element', (req, res) => {
   const element = req.body.element;
   LinkedList.add(element);
   console.log(`adding node ${element}`);
   res.send(element);
 });
 
-app.delete('/delete', (req, res) => {
+app.delete('/delete/:element', (req, res) => {
+  const element = req.params.element;
+  LinkedList.remove(element);
   console.log('deleted node');
   res.end();
 });
 
 app.put('/update', (req, res) => {
-  console.log('updating node');
-  res.end();
-});
-
-app.patch('/update', (req, res) => {
+  const element = req.params.element;
   console.log('updating node');
   res.end();
 });
