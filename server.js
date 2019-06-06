@@ -1,17 +1,22 @@
+const NodeLinked = require('./NodeLinked');
 const express = require('express');
 const app = express();
 const port = 3000;
 
-app.get('/get', (req, res) => {
-  const node = req.param;
-  console.log(`retrieving node ${node}`);
-  res.send('Hello');
+const LinkedList = new NodeLinked();
+
+app.get('/get/:element', (req, res) => {
+  const element = req.params.element;
+  console.log(`retrieving node ${element}`);
+  const node = LinkedList.getIndexOf(element);
+  res.send(`${node}`);
 });
 
 app.post('/add', (req, res) => {
-  const body = req.body;
-  console.log(`adding node ${body}`);
-  res.send(body);
+  const element = req.body.element;
+  LinkedList.add(element);
+  console.log(`adding node ${element}`);
+  res.send(element);
 });
 
 app.delete('/delete', (req, res) => {
